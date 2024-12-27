@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_USER = credentials('user')
-        DOCKER_PASS = credentials('pass')
+        DOCKER_CRED = credentials('DockerHubCredentials')
     }
 
     stages {
@@ -31,7 +30,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 echo 'Logging in to Docker Hub...'
-                sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                sh 'echo $DOCKER_CRED_PASS | docker login -u $DOCKER_CRED_USER --password-stdin'
 
                 echo 'Pushing Docker image with build tag...'
                 sh 'docker push gandonov2/student-registry-app:${BUILD_NUMBER}'
