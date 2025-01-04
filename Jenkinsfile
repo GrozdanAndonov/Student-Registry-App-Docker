@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo '$DOCKER_CRED'
                 echo 'DOCKER_CRED'
-                echo '$DOCKER_CRED_USR'
+                echo '${DOCKER_CRED_USR}'
                 echo '%DOCKER_CRED_USR%'
                 echo 'Installing npm dependencies...'
                 bat 'npm install'
@@ -27,7 +27,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
-                bat 'docker build -t $DOCKER_CRED_USR/student-registry-app:%BUILD_NUMBER% .'
+                bat 'docker build -t ${DOCKER_CRED_USR}/student-registry-app:%BUILD_NUMBER% .'
             }
         }
 
