@@ -23,7 +23,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
-                bat 'docker build -t gandonov2/student-registry-app:${BUILD_NUMBER} .'
+                bat 'docker build -t gandonov2/student-registry-app:%BUILD_NUMBER% .'
             }
         }
 
@@ -33,10 +33,10 @@ pipeline {
                 bat 'echo $DOCKER_CRED_PASS | docker login -u $DOCKER_CRED_USER --password-stdin'
 
                 echo 'Pushing Docker image with build tag...'
-                bat 'docker push gandonov2/student-registry-app:${BUILD_NUMBER}'
+                bat 'docker push gandonov2/student-registry-app:%BUILD_NUMBER%'
 
                 echo 'Tagging Docker image as latest...'
-                bat 'docker tag gandonov2/student-registry-app:${BUILD_NUMBER} gandonov2/student-registry-app:latest'
+                bat 'docker tag gandonov2/student-registry-app:%BUILD_NUMBER% gandonov2/student-registry-app:latest'
 
                 echo 'Pushing Docker image with latest tag...'
                 bat 'docker push gandonov2/student-registry-app:latest'
