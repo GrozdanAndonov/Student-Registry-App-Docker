@@ -51,6 +51,7 @@ pipeline {
                 echo 'recreate docker container'
                 bat 'docker-compose -f docker-compose.yml up --force-recreate -d'
             }
+        }
     }
 
     post {
