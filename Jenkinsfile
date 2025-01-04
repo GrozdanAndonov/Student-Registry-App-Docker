@@ -11,6 +11,7 @@ pipeline {
                 echo '$DOCKER_CRED'
                 echo 'DOCKER_CRED'
                 echo '$DOCKER_CRED_USR'
+                echo '%DOCKER_CRED_USR%'
                 echo 'Installing npm dependencies...'
                 bat 'npm install'
             }
