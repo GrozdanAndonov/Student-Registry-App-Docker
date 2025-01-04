@@ -8,9 +8,6 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                bat 'echo %DOCKER_CRED%'
-                bat 'echo %DOCKER_CRED_PSW%'
-                bat 'echo %DOCKER_CRED_USR%'
                 echo 'Installing npm dependencies...'
                 bat 'npm install'
             }
@@ -44,6 +41,14 @@ pipeline {
                 echo 'Pushing Docker image with latest tag...'
                 bat 'docker push  %DOCKER_CRED_USR%/student-registry-app:latest'
             }
+        }
+
+        stage('Deploy Docker Image') {
+            echo 'pull latest docker image'
+            bat 'docker pull %DOCKER_CRED_USR%/student-registry-app:latest'
+            
+            echo 'recreate docker container'
+            bat 'docker-compose -f docker-compose.yml up --force-recreate -d'
         }
     }
 
