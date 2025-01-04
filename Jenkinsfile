@@ -44,12 +44,13 @@ pipeline {
         }
 
         stage('Deploy Docker Image') {
-            echo 'pull latest docker image'
-            bat 'docker pull %DOCKER_CRED_USR%/student-registry-app:latest'
-            
-            echo 'recreate docker container'
-            bat 'docker-compose -f docker-compose.yml up --force-recreate -d'
-        }
+            steps {
+                echo 'pull latest docker image'
+                bat 'docker pull %DOCKER_CRED_USR%/student-registry-app:latest'
+                
+                echo 'recreate docker container'
+                bat 'docker-compose -f docker-compose.yml up --force-recreate -d'
+            }
     }
 
     post {
