@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
+                 echo "DOCKER_CRED_USER: %DOCKER_CRED%"
                 echo '$DOCKER_CRED'
                 echo 'DOCKER_CRED'
                 echo '${DOCKER_CRED_USR}'
